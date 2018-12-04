@@ -1,0 +1,55 @@
+<div class="container">
+  <h1>Image Detail</h1>
+  <div class="row">
+    <input type='button' value='Back' (click)="back()">
+  </div>
+  <div *ngIf='photo' class="row">
+    <div class="col-12 col-md-6 img-container text-center">
+      <img [src]="photo.imgurl" [alt]='photo.title._content'>
+    </div>
+
+    <div class="col-12 col-md-6">
+      <p>Title: {{photo.title._content}}</p>
+      <p>Posted By: {{photo.owner.realname}}</p>
+      <p>Description: {{photo.description._content}}</p>
+      <p>Views: {{photo.views}}</p>
+    </div>
+
+  </div>
+
+  <div *ngIf='photo' class="row mt-5">
+    <h2 class="text-center col-12">Rating Form</h2>
+    <div class="col-md-6 offset-md-3">
+      <form #myform='ngForm' (ngSubmit)='submitRating()' ngNativeValidate>
+
+        <div class="form-group">
+          <label for="by">Provided By</label>
+          <input id='by' class="form-control" type="text" [(ngModel)]='providedBy' name='providedBy' #input1='ngModel'>
+        </div>
+
+        <div class="form-group">
+          <label for="why">Reason</label>
+          <input id='why' class="form-control" type="text" [(ngModel)]='reason' name='reason' #input2='ngModel'>
+        </div>
+
+        <div *ngFor='let value of ratingValues' class="custom-control custom-radio">
+          <input type="radio" [id]="value" [value]="value" [(ngModel)]='rating' name="rating" class="custom-control-input">
+          <label class="custom-control-label" [for]="value">{{value}}</label>
+        </div>
+
+        <div class="text-center">
+          <input type='submit' [disabled]='input1.pristine||input1.invalid||input2.pristine||input2.invalid' class="btn btn-primary">
+        </div>
+
+      </form>
+    </div>
+
+  </div>
+
+  <p *ngIf='!photo && gettingData'>Loading data ...</p>
+  <p *ngIf='!photo && !gettingData'>Something went wrong! No image data !</p>
+
+
+
+
+</div>
