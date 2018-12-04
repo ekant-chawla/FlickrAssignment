@@ -16,3 +16,13 @@
     z-index: 9;
     cursor: pointer;
 }
+
+.img-container img{
+    max-width: 100%;
+}
+
+@media screen and (max-width:575px){
+    .card-hover:hover{
+        transform: none;
+}
+}
